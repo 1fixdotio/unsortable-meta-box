@@ -1,1 +1,8 @@
 /* This stylesheet is used to style the admin option form of the plugin. */
+.js .postbox .hndle {
+	cursor: default;
+}
+
+.postbox .handlediv {
+	display: none;
+}

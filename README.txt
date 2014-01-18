@@ -4,7 +4,7 @@ Donate link: http://1fix.io/
 Tags: meta-box, sortable, reset-positions
 Requires at least: 3.5
 Tested up to: 3.8
-Stable tag: 0.0.1
+Stable tag: 0.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -12,11 +12,14 @@ A plugin to make meta boxes unsortable and reset their positions.
 
 == Description ==
 
+Draggle and sortable meta box is a very cool feature. But let users customize the UI could become painful when doing tech support online or on the phone, since she / he might reorder the publish box to the bottom of the page, and you still ask her / him to look on the top right corner at the page.
+
 This plugin is made for:
 
-* Make the meta boxes unsortable. The unsortable function will only work on certain pages (post, page, custom post types etc.) if you set in the options page.
-* Reset positions of the meta boxes on certain pages. Do this on the settings page.
+* Make the meta boxes unsortable. The unsortable function works on all or certain pages (Dashboard, Post, Page, Custom Post Types etc.), which you could set in the options page.
+* Reset positions of the meta boxes on certain pages. Do this on the options page.
 * TODO - Add roles selection. (Make meta boxes unsortable or reset the positions by role.)
+* TODO - Save the positions of the meta boxes for recovery later.
 
 == Installation ==
 
@@ -45,17 +48,6 @@ e.g.
 2. Extract the `plugin-name` directory to your computer
 3. Upload the `plugin-name` directory to the `/wp-content/plugins/` directory
 4. Activate the plugin in the Plugin dashboard
-
-
-== Frequently Asked Questions ==
-
-= A question that someone might have =
-
-An answer to that question.
-
-= What about foo bar? =
-
-Answer to foo bar dilemma.
 
 == Screenshots ==
 

@@ -70,7 +70,7 @@ class Unsortable_Meta_Box_Admin {
 		$this->plugin_slug = $plugin->get_plugin_slug();
 
 		// Load admin style sheet and JavaScript.
-		// add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_styles' ) );
+		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_styles' ) );
 		// add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_scripts' ) );
 
 		// // Add the options page and menu item.
@@ -80,13 +80,13 @@ class Unsortable_Meta_Box_Admin {
 		// $plugin_basename = plugin_basename( plugin_dir_path( __DIR__ ) . $this->plugin_slug . '.php' );
 		// add_filter( 'plugin_action_links_' . $plugin_basename, array( $this, 'add_action_links' ) );
 
-		// /*
-		//  * Define custom functionality.
-		//  *
-		//  * Read more about actions and filters:
-		//  * http://codex.wordpress.org/Plugin_API#Hooks.2C_Actions_and_Filters
-		//  */
-		// add_action( '@TODO', array( $this, 'action_method_name' ) );
+		/*
+		 * Define custom functionality.
+		 *
+		 * Read more about actions and filters:
+		 * http://codex.wordpress.org/Plugin_API#Hooks.2C_Actions_and_Filters
+		 */
+		add_action( 'admin_init', array( $this, 'disable_sortable' ) );
 		// add_filter( '@TODO', array( $this, 'filter_method_name' ) );
 
 	}
@@ -120,24 +120,22 @@ class Unsortable_Meta_Box_Admin {
 	/**
 	 * Register and enqueue admin-specific style sheet.
 	 *
-	 * @TODO:
-	 *
-	 * - Rename "Unsortable_Meta_Box" to the name your plugin
-	 *
-	 * @since     0.0.1
+	 * @since     0.1
 	 *
 	 * @return    null    Return early if no settings page is registered.
 	 */
 	public function enqueue_admin_styles() {
 
-		if ( ! isset( $this->plugin_screen_hook_suffix ) ) {
-			return;
-		}
+		// if ( ! isset( $this->plugin_screen_hook_suffix ) ) {
+		// 	return;
+		// }
 
-		$screen = get_current_screen();
-		if ( $this->plugin_screen_hook_suffix == $screen->id ) {
-			wp_enqueue_style( $this->plugin_slug .'-admin-styles', plugins_url( 'assets/css/admin.css', __FILE__ ), array(), Unsortable_Meta_Box::VERSION );
-		}
+		wp_enqueue_style( $this->plugin_slug .'-admin-styles', plugins_url( 'assets/css/admin.css', __FILE__ ), array(), Unsortable_Meta_Box::VERSION );
+
+		// $screen = get_current_screen();
+		// if ( $this->plugin_screen_hook_suffix == $screen->id ) {
+		// 	wp_enqueue_style( $this->plugin_slug .'-admin-styles', plugins_url( 'assets/css/admin.css', __FILE__ ), array(), Unsortable_Meta_Box::VERSION );
+		// }
 
 	}
 
@@ -158,10 +156,10 @@ class Unsortable_Meta_Box_Admin {
 			return;
 		}
 
-		$screen = get_current_screen();
-		if ( $this->plugin_screen_hook_suffix == $screen->id ) {
-			wp_enqueue_script( $this->plugin_slug . '-admin-script', plugins_url( 'assets/js/admin.js', __FILE__ ), array( 'jquery' ), Unsortable_Meta_Box::VERSION );
-		}
+		// $screen = get_current_screen();
+		// if ( $this->plugin_screen_hook_suffix == $screen->id ) {
+		// 	wp_enqueue_script( $this->plugin_slug . '-admin-script', plugins_url( 'assets/js/admin.js', __FILE__ ), array( 'jquery' ), Unsortable_Meta_Box::VERSION );
+		// }
 
 	}
 
@@ -222,16 +220,12 @@ class Unsortable_Meta_Box_Admin {
 	}
 
 	/**
-	 * NOTE:     Actions are points in the execution of a page or process
-	 *           lifecycle that WordPress fires.
+	 * Disable meta box sortable script
 	 *
-	 *           Actions:    http://codex.wordpress.org/Plugin_API#Actions
-	 *           Reference:  http://codex.wordpress.org/Plugin_API/Action_Reference
-	 *
-	 * @since    0.0.1
+	 * @since    0.1
 	 */
-	public function action_method_name() {
-		// @TODO: Define your action hook callback here
+	public function disable_sortable() {
+		wp_deregister_script( 'postbox' );
 	}
 
 	/**
