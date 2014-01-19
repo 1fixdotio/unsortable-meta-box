@@ -42,6 +42,15 @@ class Unsortable_Meta_Box_Admin {
 	protected $plugin_screen_hook_suffix = null;
 
 	/**
+	 * Plugin options
+	 *
+	 * @since 0.4
+	 *
+	 * @var array
+	 */
+	protected $options = array();
+
+	/**
 	 * Initialize the plugin by loading admin scripts & styles and adding a
 	 * settings page and menu.
 	 *
@@ -89,7 +98,7 @@ class Unsortable_Meta_Box_Admin {
 		 * Read more about actions and filters:
 		 * http://codex.wordpress.org/Plugin_API#Hooks.2C_Actions_and_Filters
 		 */
-		add_action( 'admin_init', array( $this, 'disable_sortable' ) );
+		add_action( 'admin_enqueue_scripts', array( $this, 'disable_sortable' ) );
 		add_action( 'admin_action_update', array( $this, 'reset_positions' ) );
 		// add_filter( '@TODO', array( $this, 'filter_method_name' ) );
 
@@ -133,8 +142,14 @@ class Unsortable_Meta_Box_Admin {
 		// if ( ! isset( $this->plugin_screen_hook_suffix ) ) {
 		// 	return;
 		// }
+		$options = $this->get_options();
+		$pages = $options['pages_unsortable'];
 
-		wp_enqueue_style( $this->plugin_slug .'-admin-styles', plugins_url( 'assets/css/admin.css', __FILE__ ), array(), Unsortable_Meta_Box::VERSION );
+		$screen = get_current_screen();
+		foreach ( $pages as $page ) {
+			if ( $screen->id == $page )
+				wp_enqueue_style( $this->plugin_slug .'-admin-styles', plugins_url( 'assets/css/admin.css', __FILE__ ), array(), Unsortable_Meta_Box::VERSION );
+		}
 
 		// $screen = get_current_screen();
 		// if ( $this->plugin_screen_hook_suffix == $screen->id ) {
@@ -224,13 +239,23 @@ class Unsortable_Meta_Box_Admin {
 	 * @since    0.1
 	 */
 	public function disable_sortable() {
-		wp_deregister_script( 'postbox' );
+
+		$options = $this->get_options();
+		$pages = $options['pages_unsortable'];
+
+		$screen = get_current_screen();
+		foreach ( $pages as $page ) {
+			if ( $screen->id == $page )
+				wp_deregister_script( 'postbox' );
+		}
+
 	}
 
 	/**
 	 * Reset positions of meta boxes on checked pages
 	 *
 	 * @since 0.3
+	 *
 	 * @return void
 	 */
 	public function reset_positions() {
@@ -249,6 +274,26 @@ class Unsortable_Meta_Box_Admin {
 				$wpdb->query( $query );
 			}
 		}
+	}
+
+	/**
+	 * Get plugin options
+	 *
+	 * @since 0.4
+	 *
+	 * @return array|string The option settings
+	 */
+	public function get_options() {
+
+		$this->options = get_option( $this->plugin_slug );
+
+		if ( empty( $this->options ) )
+			$this->options = array(
+				'pages_unsortable' => array(),
+				'pages_reset_positions' => array()
+				);
+
+		return $this->options;
 	}
 
 	/**
