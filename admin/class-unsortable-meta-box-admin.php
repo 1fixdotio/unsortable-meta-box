@@ -73,12 +73,15 @@ class Unsortable_Meta_Box_Admin {
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_styles' ) );
 		// add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_scripts' ) );
 
-		// // Add the options page and menu item.
-		// add_action( 'admin_menu', array( $this, 'add_plugin_admin_menu' ) );
+		// Add the options page and menu item.
+		require_once( plugin_dir_path( __FILE__ ) . 'includes/class.settings-api.php' );
+		require_once( plugin_dir_path( __FILE__ ) . 'includes/settings.php' );
 
-		// // Add an action link pointing to the options page.
-		// $plugin_basename = plugin_basename( plugin_dir_path( __DIR__ ) . $this->plugin_slug . '.php' );
-		// add_filter( 'plugin_action_links_' . $plugin_basename, array( $this, 'add_action_links' ) );
+		// Add the options page and menu item.
+		add_action( 'admin_menu', array( $this, 'add_plugin_admin_menu' ) );
+		// Add an action link pointing to the options page.
+		$plugin_basename = plugin_basename( plugin_dir_path( __DIR__ ) . $this->plugin_slug . '.php' );
+		add_filter( 'plugin_action_links_' . $plugin_basename, array( $this, 'add_action_links' ) );
 
 		/*
 		 * Define custom functionality.
@@ -176,17 +179,10 @@ class Unsortable_Meta_Box_Admin {
 		 * NOTE:  Alternative menu locations are available via WordPress administration menu functions.
 		 *
 		 *        Administration Menus: http://codex.wordpress.org/Administration_Menus
-		 *
-		 * @TODO:
-		 *
-		 * - Change 'Page Title' to the title of your plugin admin page
-		 * - Change 'Menu Text' to the text for menu item for the plugin settings page
-		 * - Change 'manage_options' to the capability you see fit
-		 *   For reference: http://codex.wordpress.org/Roles_and_Capabilities
 		 */
 		$this->plugin_screen_hook_suffix = add_options_page(
-			__( 'Page Title', $this->plugin_slug ),
-			__( 'Menu Text', $this->plugin_slug ),
+			__( 'Unsortable Meta Box Settings', $this->plugin_slug ),
+			__( 'Unsortable Meta Box', $this->plugin_slug ),
 			'manage_options',
 			$this->plugin_slug,
 			array( $this, 'display_plugin_admin_page' )
