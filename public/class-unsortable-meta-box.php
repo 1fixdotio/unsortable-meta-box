@@ -30,7 +30,7 @@ class Unsortable_Meta_Box {
 	 *
 	 * @var     string
 	 */
-	const VERSION = '0.2';
+	const VERSION = '0.3';
 
 	/**
 	 * @TODO - Rename "unsortable-meta-box" to the name your your plugin

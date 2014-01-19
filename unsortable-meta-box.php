@@ -14,7 +14,7 @@
  * Plugin Name:       Unsortable Meta Box
  * Plugin URI:        http://1fix.io/unsortable-meta-box
  * Description:       A plugin to make meta boxes unsortable and reset their positions.
- * Version:           0.2
+ * Version:           0.3
  * Author:            1fixdotio
  * Author URI:        http://1fix.io
  * Text Domain:       unsortable-meta-box

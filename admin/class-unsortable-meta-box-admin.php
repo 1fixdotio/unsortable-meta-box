@@ -90,6 +90,7 @@ class Unsortable_Meta_Box_Admin {
 		 * http://codex.wordpress.org/Plugin_API#Hooks.2C_Actions_and_Filters
 		 */
 		add_action( 'admin_init', array( $this, 'disable_sortable' ) );
+		add_action( 'admin_action_update', array( $this, 'reset_positions' ) );
 		// add_filter( '@TODO', array( $this, 'filter_method_name' ) );
 
 	}
@@ -188,6 +189,8 @@ class Unsortable_Meta_Box_Admin {
 			array( $this, 'display_plugin_admin_page' )
 		);
 
+		// add_contextual_help( $this->plugin_screen_hook_suffix, '<p>Some custom help text.</p>' );
+
 	}
 
 	/**
@@ -222,6 +225,30 @@ class Unsortable_Meta_Box_Admin {
 	 */
 	public function disable_sortable() {
 		wp_deregister_script( 'postbox' );
+	}
+
+	/**
+	 * Reset positions of meta boxes on checked pages
+	 *
+	 * @since 0.3
+	 * @return void
+	 */
+	public function reset_positions() {
+
+		global $wpdb;
+
+		if ( 'unsortable-meta-box' == $_POST['option_page'] ) {
+			$options = $_POST['unsortable-meta-box'];
+			foreach( $options['pages_reset_positions'] as $page ) {
+				$query = $wpdb->prepare("
+					DELETE
+					FROM  $wpdb->usermeta
+					WHERE meta_key LIKE %s
+					", 'meta-box-order_' . $page );
+
+				$wpdb->query( $query );
+			}
+		}
 	}
 
 	/**
