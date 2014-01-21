@@ -18,3 +18,7 @@ require_once( plugin_dir_path( __FILE__ ) . 'public/class-unsortable-meta-box.ph
 
 $plugin = Unsortable_Meta_Box::get_instance();
 delete_option( $plugin->get_plugin_slug() );
+delete_option( 'umb-display-activation-message' );
+/**
+ * @todo Delete options in whole network
+ */

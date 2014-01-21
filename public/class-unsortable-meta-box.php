@@ -28,7 +28,7 @@ class Unsortable_Meta_Box {
 	 *
 	 * @var     string
 	 */
-	const VERSION = '0.5.6';
+	const VERSION = '0.6';
 
 	/**
 	 * Unique identifier for your plugin.
@@ -63,6 +63,9 @@ class Unsortable_Meta_Box {
 
 		// Load plugin text domain
 		add_action( 'init', array( $this, 'load_plugin_textdomain' ) );
+
+		// Display the admin notification
+		add_action( 'admin_notices', array( $this, 'plugin_activation' ) ) ;
 
 	}
 
@@ -130,6 +133,26 @@ class Unsortable_Meta_Box {
 			self::single_activate();
 		}
 
+	}
+
+	public function plugin_activation() {
+
+		$screen = get_current_screen();
+
+		if( false == get_option( 'umb-display-activation-message' ) && 'plugins' == $screen->id ) {
+			$plugin = self::get_instance();
+
+			add_option( 'umb-display-activation-message', true );
+
+			$html = '<div class="updated">';
+				$html .= '<p>';
+					$html .= sprintf( __( 'Your meta boxes are still draggable! Please change the <strong><a href="%s">Settings</a></strong> to make them unsortable!', $plugin->get_plugin_slug() ), admin_url( 'options-general.php?page=' . $plugin->get_plugin_slug() ) );
+				$html .= '</p>';
+			$html .= '</div><!-- /.updated -->';
+
+			echo $html;
+
+		}
 	}
 
 	/**
@@ -200,17 +223,29 @@ class Unsortable_Meta_Box {
 	 */
 	private static function single_activate() {
 
+
 	}
 
 	/**
 	 * Fired for each blog when the plugin is deactivated.
 	 *
-	 * @since    0.5
+	 * @since    0.6
 	 */
 	private static function single_deactivate() {
 
-		$plugin = self::get_instance();
-		delete_option( $plugin->get_plugin_slug() );
+		if( false == delete_option( 'umb-display-activation-message' ) ) {
+			$plugin = self::get_instance();
+
+			$html = '<div class="error">';
+				$html .= '<p>';
+					$html .= __( 'There was a problem deactivating the Unsortable Meta Box plugin. Please try again.', $plugin->get_plugin_slug() );
+				$html .= '</p>';
+			$html .= '</div><!-- /.updated -->';
+
+			echo $html;
+
+		}
+
 	}
 
 	/**
