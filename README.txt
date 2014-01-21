@@ -51,5 +51,8 @@ Add later.
 
 == Changelog ==
 
+= 0.6 =
+* Add activation and deactivation messages.
+
 = 0.5 =
 * The first version.
