@@ -14,5 +14,7 @@ if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 	exit;
 }
 
+require_once( plugin_dir_path( __FILE__ ) . 'public/class-unsortable-meta-box.php' );
+
 $plugin = Unsortable_Meta_Box::get_instance();
 delete_option( $plugin->get_plugin_slug() );
