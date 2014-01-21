@@ -2,7 +2,7 @@
 /**
  * Unsortable Meta Box.
  *
- * A plugin to make meta boxes unsortable and reset their positions.
+ * Disable dragging of meta boxes and reset their positions.
  *
  * @package   Unsortable_Meta_Box
  * @author    1fixdotio <1fixdotio@gmail.com>
@@ -13,8 +13,8 @@
  * @wordpress-plugin
  * Plugin Name:       Unsortable Meta Box
  * Plugin URI:        http://1fix.io/unsortable-meta-box
- * Description:       A plugin to make meta boxes unsortable and reset their positions.
- * Version:           0.4
+ * Description:       Disable dragging of meta boxes and reset their positions
+ * Version:           0.5
  * Author:            1fixdotio
  * Author URI:        http://1fix.io
  * Text Domain:       unsortable-meta-box
@@ -33,54 +33,21 @@ if ( ! defined( 'WPINC' ) ) {
  * Public-Facing Functionality
  *----------------------------------------------------------------------------*/
 
-/*
- * @TODO:
- *
- * - replace `class-unsortable-meta-box.php` with the name of the plugin's class file
- *
- */
 require_once( plugin_dir_path( __FILE__ ) . 'public/class-unsortable-meta-box.php' );
 
 /*
  * Register hooks that are fired when the plugin is activated or deactivated.
  * When the plugin is deleted, the uninstall.php file is loaded.
- *
- * @TODO:
- *
- * - replace Unsortable_Meta_Box with the name of the class defined in
- *   `class-unsortable-meta-box.php`
  */
 register_activation_hook( __FILE__, array( 'Unsortable_Meta_Box', 'activate' ) );
 register_deactivation_hook( __FILE__, array( 'Unsortable_Meta_Box', 'deactivate' ) );
 
-/*
- * @TODO:
- *
- * - replace Unsortable_Meta_Box with the name of the class defined in
- *   `class-unsortable-meta-box.php`
- */
 add_action( 'plugins_loaded', array( 'Unsortable_Meta_Box', 'get_instance' ) );
 
 /*----------------------------------------------------------------------------*
  * Dashboard and Administrative Functionality
  *----------------------------------------------------------------------------*/
 
-/*
- * @TODO:
- *
- * - replace `class-unsortable-meta-box-admin.php` with the name of the plugin's admin file
- * - replace Unsortable_Meta_Box_Admin with the name of the class defined in
- *   `class-unsortable-meta-box-admin.php`
- *
- * If you want to include Ajax within the dashboard, change the following
- * conditional to:
- *
- * if ( is_admin() ) {
- *   ...
- * }
- *
- * The code below is intended to to give the lightest footprint possible.
- */
 if ( is_admin() && ( ! defined( 'DOING_AJAX' ) || ! DOING_AJAX ) ) {
 
 	require_once( plugin_dir_path( __FILE__ ) . 'admin/class-unsortable-meta-box-admin.php' );

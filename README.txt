@@ -4,28 +4,24 @@ Donate link: http://1fix.io/
 Tags: meta-box, sortable, reset-positions
 Requires at least: 3.5
 Tested up to: 3.8
-Stable tag: 0.4
+Stable tag: 0.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-A plugin to make meta boxes unsortable and reset their positions.
+Disable dragging of meta boxes and reset their positions.
 
 == Description ==
 
-Draggle and sortable meta box is a very cool feature. But let users customize the UI could become painful when doing tech support online or on the phone, since she / he might reorder the publish box to the bottom of the page, and you still ask her / him to look on the top right corner at the page.
+Draggable and sortable meta boxes is one of the cool features of WordPress. But let users customize the UI could become painful when doing technical supports online or on the phone. The client might has moved the publish box to the bottom of the page, but you still ask her / him to look at the top right corner for it. Unsortable Meta Box is a simple fix to situation like this.
 
 This plugin is made for:
 
-* Make the meta boxes unsortable. The unsortable function works on all or certain pages (Dashboard, Post, Page, Custom Post Types etc.), which you could set in the options page.
-* Reset positions of the meta boxes on certain pages. Do this on the options page.
-* TODO - Add roles selection. (Make meta boxes unsortable or reset the positions by role.)
+* Disable dragging of meta boxes. You could disable dragging on all or certain pages (Dashboard, Post, Page, Custom Post Types etc.), which could be set on the Settings page.
+* Reset positions of the meta boxes on certain pages. Do this on the Settings page.
+* TODO - Add roles selection. (Disable dragging or reset the positions for selected roles.)
 * TODO - Save the positions of the meta boxes for recovery later.
 
 == Installation ==
-
-This section describes how to install the plugin and get it working.
-
-e.g.
 
 = Using The WordPress Dashboard =
 
@@ -51,14 +47,9 @@ e.g.
 
 == Screenshots ==
 
-1. This screen shot description corresponds to screenshot-1.(png|jpg|jpeg|gif). Note that the screenshot is taken from
-the /assets directory or the directory that contains the stable readme.txt (tags or trunk). Screenshots in the /assets
-directory take precedence. For example, `/assets/screenshot-1.png` would win over `/tags/4.3/screenshot-1.png`
-(or jpg, jpeg, gif).
-2. This is the second screen shot
+Add later.
 
 == Changelog ==
 
-= 1.0 =
-* A change since the previous version.
-* Another change.
+= 0.5 =
+* The first version.

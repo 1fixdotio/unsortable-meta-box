@@ -16,8 +16,6 @@
  * If you're interested in introducing administrative or dashboard
  * functionality, then refer to `class-unsortable-meta-box-admin.php`
  *
- * @TODO: Rename this class to a proper name for your plugin.
- *
  * @package Unsortable_Meta_Box
  * @author  1fixdotio <1fixdotio@gmail.com>
  */
@@ -30,11 +28,9 @@ class Unsortable_Meta_Box {
 	 *
 	 * @var     string
 	 */
-	const VERSION = '0.4';
+	const VERSION = '0.5';
 
 	/**
-	 * @TODO - Rename "unsortable-meta-box" to the name your your plugin
-	 *
 	 * Unique identifier for your plugin.
 	 *
 	 *
@@ -68,19 +64,6 @@ class Unsortable_Meta_Box {
 		// Load plugin text domain
 		add_action( 'init', array( $this, 'load_plugin_textdomain' ) );
 
-		// Activate plugin when new blog is added
-		// add_action( 'wpmu_new_blog', array( $this, 'activate_new_site' ) );
-
-		// // Load public-facing style sheet and JavaScript.
-		// add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_styles' ) );
-		// add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
-
-		// /* Define custom functionality.
-		//  * Refer To http://codex.wordpress.org/Plugin_API#Hooks.2C_Actions_and_Filters
-		//  */
-		// add_action( '@TODO', array( $this, 'action_method_name' ) );
-		// add_filter( '@TODO', array( $this, 'filter_method_name' ) );
-
 	}
 
 	/**
@@ -91,6 +74,7 @@ class Unsortable_Meta_Box {
 	 * @return    Plugin slug variable.
 	 */
 	public function get_plugin_slug() {
+
 		return $this->plugin_slug;
 	}
 
@@ -187,25 +171,6 @@ class Unsortable_Meta_Box {
 	}
 
 	/**
-	 * Fired when a new site is activated with a WPMU environment.
-	 *
-	 * @since    0.0.1
-	 *
-	 * @param    int    $blog_id    ID of the new blog.
-	 */
-	public function activate_new_site( $blog_id ) {
-
-		if ( 1 !== did_action( 'wpmu_new_blog' ) ) {
-			return;
-		}
-
-		switch_to_blog( $blog_id );
-		self::single_activate();
-		restore_current_blog();
-
-	}
-
-	/**
 	 * Get all blog ids of blogs in the current network that are:
 	 * - not archived
 	 * - not spam
@@ -234,16 +199,18 @@ class Unsortable_Meta_Box {
 	 * @since    0.0.1
 	 */
 	private static function single_activate() {
-		// @TODO: Define activation functionality here
+
 	}
 
 	/**
 	 * Fired for each blog when the plugin is deactivated.
 	 *
-	 * @since    0.0.1
+	 * @since    0.5
 	 */
 	private static function single_deactivate() {
-		// @TODO: Define deactivation functionality here
+
+		$plugin = self::get_instance();
+		delete_option( $plugin->get_plugin_slug() );
 	}
 
 	/**
@@ -258,50 +225,6 @@ class Unsortable_Meta_Box {
 
 		load_textdomain( $domain, trailingslashit( WP_LANG_DIR ) . $domain . '/' . $domain . '-' . $locale . '.mo' );
 
-	}
-
-	/**
-	 * Register and enqueue public-facing style sheet.
-	 *
-	 * @since    0.0.1
-	 */
-	public function enqueue_styles() {
-		wp_enqueue_style( $this->plugin_slug . '-plugin-styles', plugins_url( 'assets/css/public.css', __FILE__ ), array(), self::VERSION );
-	}
-
-	/**
-	 * Register and enqueues public-facing JavaScript files.
-	 *
-	 * @since    0.0.1
-	 */
-	public function enqueue_scripts() {
-		wp_enqueue_script( $this->plugin_slug . '-plugin-script', plugins_url( 'assets/js/public.js', __FILE__ ), array( 'jquery' ), self::VERSION );
-	}
-
-	/**
-	 * NOTE:  Actions are points in the execution of a page or process
-	 *        lifecycle that WordPress fires.
-	 *
-	 *        Actions:    http://codex.wordpress.org/Plugin_API#Actions
-	 *        Reference:  http://codex.wordpress.org/Plugin_API/Action_Reference
-	 *
-	 * @since    0.0.1
-	 */
-	public function action_method_name() {
-		// @TODO: Define your action hook callback here
-	}
-
-	/**
-	 * NOTE:  Filters are points of execution in which WordPress modifies data
-	 *        before saving it or sending it to the browser.
-	 *
-	 *        Filters: http://codex.wordpress.org/Plugin_API#Filters
-	 *        Reference:  http://codex.wordpress.org/Plugin_API/Filter_Reference
-	 *
-	 * @since    0.0.1
-	 */
-	public function filter_method_name() {
-		// @TODO: Define your filter hook callback here
 	}
 
 }

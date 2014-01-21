@@ -16,8 +16,6 @@
  * If you're interested in introducing public-facing
  * functionality, then refer to `class-plugin-name.php`
  *
- * @TODO: Rename this class to a proper name for your plugin.
- *
  * @package Unsortable_Meta_Box_Admin
  * @author  1fixdotio <1fixdotio@gmail.com>
  */
@@ -59,20 +57,7 @@ class Unsortable_Meta_Box_Admin {
 	private function __construct() {
 
 		/*
-		 * @TODO :
-		 *
-		 * - Uncomment following lines if the admin class should only be available for super admins
-		 */
-		/* if( ! is_super_admin() ) {
-			return;
-		} */
-
-		/*
 		 * Call $plugin_slug from public plugin class.
-		 *
-		 * @TODO:
-		 *
-		 * - Rename "Unsortable_Meta_Box" to the name of your initial plugin class
 		 *
 		 */
 		$plugin = Unsortable_Meta_Box::get_instance();
@@ -113,15 +98,6 @@ class Unsortable_Meta_Box_Admin {
 	 */
 	public static function get_instance() {
 
-		/*
-		 * @TODO :
-		 *
-		 * - Uncomment following lines if the admin class should only be available for super admins
-		 */
-		/* if( ! is_super_admin() ) {
-			return;
-		} */
-
 		// If the single instance hasn't been set, set it now.
 		if ( null == self::$instance ) {
 			self::$instance = new self;
@@ -160,10 +136,6 @@ class Unsortable_Meta_Box_Admin {
 
 	/**
 	 * Register and enqueue admin-specific JavaScript.
-	 *
-	 * @TODO:
-	 *
-	 * - Rename "Unsortable_Meta_Box" to the name your plugin
 	 *
 	 * @since     0.0.1
 	 *
