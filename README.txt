@@ -1,10 +1,10 @@
 === Unsortable Meta Box ===
 Contributors: yoren
 Donate link: http://1fix.io/
-Tags: meta-box, sortable, reset-positions
+Tags: disable-dragging, meta-box, unsort, reset-positions
 Requires at least: 3.5
 Tested up to: 3.8
-Stable tag: 0.5
+Stable tag: 0.5.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 

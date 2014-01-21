@@ -14,4 +14,5 @@ if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 	exit;
 }
 
-// @TODO: Define uninstall functionality here
+$plugin = Unsortable_Meta_Box::get_instance();
+delete_option( $plugin->get_plugin_slug() );
