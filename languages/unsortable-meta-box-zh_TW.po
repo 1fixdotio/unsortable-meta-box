@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Unsortable Meta Box\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/plugins/plugin-name\n"
-"POT-Creation-Date: 2014-01-22 15:49+0800\n"
-"PO-Revision-Date: 2014-01-22 15:49+0800\n"
+"POT-Creation-Date: 2014-01-22 15:52+0800\n"
+"PO-Revision-Date: 2014-01-22 15:59+0800\n"
 "Last-Translator: Yoren Chang <yorenchang@gmail.com>\n"
 "Language-Team: 1fixdotio <1fixdotio@gmail.com>\n"
 "Language: en_US\n"
@@ -22,7 +22,7 @@ msgstr ""
 
 #: admin/class-unsortable-meta-box-admin.php:172
 msgid "Unsortable Meta Box Settings"
-msgstr ""
+msgstr "Unsortable Meta Box 設定"
 
 #: admin/class-unsortable-meta-box-admin.php:173
 msgid "Unsortable Meta Box"
@@ -31,23 +31,23 @@ msgstr ""
 #: admin/class-unsortable-meta-box-admin.php:201
 #: admin/includes/settings.php:31
 msgid "Settings"
-msgstr ""
+msgstr "設定"
 
 #: admin/includes/settings.php:58
 msgid "Pages to disable sortable meta boxes:"
-msgstr ""
+msgstr "禁止拖曳 Meta Box 的頁面："
 
 #: admin/includes/settings.php:59
 msgid "Meta boxes in checked pages can't be dragged or sorted."
-msgstr ""
+msgstr "在勾選頁面裡的 Meta Box 將不可被拖曳"
 
 #: admin/includes/settings.php:65
 msgid "Pages to reset positions of meta boxes:"
-msgstr ""
+msgstr "需復原 Meta Box 位置的頁面："
 
 #: admin/includes/settings.php:66
 msgid "The positions of meta boxes in checked pages will be reset."
-msgstr ""
+msgstr "在勾選頁面裡的 Meta Box 位置將被復原"
 
 #: public/class-unsortable-meta-box.php:149
 #, php-format
@@ -55,9 +55,11 @@ msgid ""
 "Your meta boxes are still draggable! Please change the <strong><a href=\"%s"
 "\">Settings</a></strong> to make them unsortable!"
 msgstr ""
+"請先完成外掛<strong><a href='%s'>設定</a></strong>，Meta Box 的禁止拖曳才會有"
+"作用。"
 
 #: public/class-unsortable-meta-box.php:241
 msgid ""
 "There was a problem deactivating the Unsortable Meta Box plugin. Please try "
 "again."
-msgstr ""
+msgstr "在停用 Unsortable Meta Box 時發生問題，請再重試一次。"

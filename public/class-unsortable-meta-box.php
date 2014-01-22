@@ -28,7 +28,7 @@ class Unsortable_Meta_Box {
 	 *
 	 * @var     string
 	 */
-	const VERSION = '0.6';
+	const VERSION = '0.7';
 
 	/**
 	 * Unique identifier for your plugin.
@@ -258,7 +258,7 @@ class Unsortable_Meta_Box {
 		$domain = $this->plugin_slug;
 		$locale = apply_filters( 'plugin_locale', get_locale(), $domain );
 
-		load_textdomain( $domain, trailingslashit( WP_LANG_DIR ) . $domain . '/' . $domain . '-' . $locale . '.mo' );
+		load_textdomain( $domain, trailingslashit( WP_PLUGIN_DIR ) . $domain . '/languages/' . $domain . '-' . $locale . '.mo' );
 
 	}
 

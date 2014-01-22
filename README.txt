@@ -1,10 +1,11 @@
 === Unsortable Meta Box ===
-Contributors: yoren
+
+Contributors: 1fixdotio, yoren
 Donate link: http://1fix.io/
 Tags: disable-dragging, meta-box, unsort, reset-positions
 Requires at least: 3.5
 Tested up to: 3.8
-Stable tag: 0.6
+Stable tag: 0.7
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -26,7 +27,7 @@ This plugin is made for:
 = Using The WordPress Dashboard =
 
 1. Navigate to the 'Add New' in the plugins dashboard
-2. Search for 'plugin-name'
+2. Search for 'unsortable-meta-box'
 3. Click 'Install Now'
 4. Activate the plugin on the Plugin dashboard
 
@@ -34,22 +35,26 @@ This plugin is made for:
 
 1. Navigate to the 'Add New' in the plugins dashboard
 2. Navigate to the 'Upload' area
-3. Select `plugin-name.zip` from your computer
+3. Select `unsortable-meta-box.zip` from your computer
 4. Click 'Install Now'
 5. Activate the plugin in the Plugin dashboard
 
 = Using FTP =
 
-1. Download `plugin-name.zip`
-2. Extract the `plugin-name` directory to your computer
-3. Upload the `plugin-name` directory to the `/wp-content/plugins/` directory
+1. Download `unsortable-meta-box.zip`
+2. Extract the `unsortable-meta-box` directory to your computer
+3. Upload the `unsortable-meta-box` directory to the `/wp-content/plugins/` directory
 4. Activate the plugin in the Plugin dashboard
 
 == Screenshots ==
 
-Add later.
+1. Display a notification after plugin activation.
+2. A settings page for this plugin.
 
 == Changelog ==
+
+= 0.7 =
+* Translation for Traditional Chinese has been added.
 
 = 0.6 =
 * Add activation and deactivation messages.
