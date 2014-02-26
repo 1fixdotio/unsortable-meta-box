@@ -74,7 +74,7 @@ class Unsortable_Meta_Box {
 	 *
 	 * @since    0.0.1
 	 *
-	 * @return    Plugin slug variable.
+	 * @return string Plugin slug variable.
 	 */
 	public function get_plugin_slug() {
 
@@ -154,7 +154,7 @@ class Unsortable_Meta_Box {
 				// Get all blog ids
 				$blog_ids = self::get_blog_ids();
 
-				foreach ( $blog_ids as $blog_id ) {
+				foreach ( (array) $blog_ids as $blog_id ) {
 
 					switch_to_blog( $blog_id );
 					self::single_deactivate();
