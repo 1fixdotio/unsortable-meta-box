@@ -28,7 +28,7 @@ class Unsortable_Meta_Box {
 	 *
 	 * @var     string
 	 */
-	const VERSION = '0.7';
+	const VERSION = '0.8.0';
 
 	/**
 	 * Unique identifier for your plugin.
