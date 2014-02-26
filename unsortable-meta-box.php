@@ -39,7 +39,7 @@ require_once( plugin_dir_path( __FILE__ ) . 'public/class-unsortable-meta-box.ph
  * Register hooks that are fired when the plugin is activated or deactivated.
  * When the plugin is deleted, the uninstall.php file is loaded.
  */
-// register_activation_hook( __FILE__, array( 'Unsortable_Meta_Box', 'activate' ) );
+register_activation_hook( __FILE__, array( 'Unsortable_Meta_Box', 'activate' ) );
 register_deactivation_hook( __FILE__, array( 'Unsortable_Meta_Box', 'deactivate' ) );
 
 add_action( 'plugins_loaded', array( 'Unsortable_Meta_Box', 'get_instance' ) );

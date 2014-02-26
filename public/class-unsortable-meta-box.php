@@ -65,7 +65,7 @@ class Unsortable_Meta_Box {
 		add_action( 'init', array( $this, 'load_plugin_textdomain' ) );
 
 		// Display the admin notification
-		add_action( 'admin_notices', array( $this, 'plugin_activation' ) ) ;
+		add_action( 'admin_notices', array( $this, 'admin_notice_activation' ) );
 
 	}
 
@@ -117,7 +117,7 @@ class Unsortable_Meta_Box {
 				// Get all blog ids
 				$blog_ids = self::get_blog_ids();
 
-				foreach ( $blog_ids as $blog_id ) {
+				foreach ( (array) $blog_ids as $blog_id ) {
 
 					switch_to_blog( $blog_id );
 					self::single_activate();
@@ -133,26 +133,6 @@ class Unsortable_Meta_Box {
 			self::single_activate();
 		}
 
-	}
-
-	public function plugin_activation() {
-
-		$screen = get_current_screen();
-
-		if( false == get_option( 'umb-display-activation-message' ) && 'plugins' == $screen->id ) {
-			$plugin = self::get_instance();
-
-			add_option( 'umb-display-activation-message', true );
-
-			$html = '<div class="updated">';
-				$html .= '<p>';
-					$html .= sprintf( __( 'Your meta boxes are still draggable! Please change the <strong><a href="%s">Settings</a></strong> to make them unsortable!', $plugin->get_plugin_slug() ), admin_url( 'options-general.php?page=' . $plugin->get_plugin_slug() ) );
-				$html .= '</p>';
-			$html .= '</div><!-- /.updated -->';
-
-			echo $html;
-
-		}
 	}
 
 	/**
@@ -223,7 +203,9 @@ class Unsortable_Meta_Box {
 	 */
 	private static function single_activate() {
 
-
+		if( false == get_option( 'umb-display-activation-message' ) ) {
+			add_option( 'umb-display-activation-message', true );
+		}
 	}
 
 	/**
@@ -233,19 +215,28 @@ class Unsortable_Meta_Box {
 	 */
 	private static function single_deactivate() {
 
-		if( false == delete_option( 'umb-display-activation-message' ) ) {
+		delete_option( 'umb-display-activation-message' );
+
+	}
+
+	public function admin_notice_activation() {
+
+		$screen = get_current_screen();
+
+		if( true == get_option( 'umb-display-activation-message' ) && 'plugins' == $screen->id ) {
 			$plugin = self::get_instance();
 
-			$html = '<div class="error">';
+			$html = '<div class="updated">';
 				$html .= '<p>';
-					$html .= __( 'There was a problem deactivating the Unsortable Meta Box plugin. Please try again.', $plugin->get_plugin_slug() );
+					$html .= sprintf( __( 'Now you can make your meta boxes unsortable in the <strong><a href="%s">Settings</a></strong>.', $plugin->get_plugin_slug() ), admin_url( 'options-general.php?page=' . $plugin->get_plugin_slug() ) );
 				$html .= '</p>';
 			$html .= '</div><!-- /.updated -->';
 
 			echo $html;
 
-		}
+			delete_option( 'umb-display-activation-message' );
 
+		}
 	}
 
 	/**

@@ -14,12 +14,24 @@
  * administrative side of the WordPress site.
  *
  * If you're interested in introducing public-facing
- * functionality, then refer to `class-plugin-name.php`
+ * functionality, then refer to `class-unsortable-meta-box.php`
  *
  * @package Unsortable_Meta_Box_Admin
  * @author  1fixdotio <1fixdotio@gmail.com>
  */
 class Unsortable_Meta_Box_Admin {
+
+	/**
+	 * Unique identifier for your plugin.
+	 *
+	 *
+	 * Call $plugin_slug from public plugin class later.
+	 *
+	 * @since    0.8.0
+	 *
+	 * @var      string
+	 */
+	protected $plugin_slug = null;
 
 	/**
 	 * Instance of this class.
@@ -118,7 +130,7 @@ class Unsortable_Meta_Box_Admin {
 		// 	return;
 		// }
 		$options = $this->get_options();
-		$pages = $options['pages_unsortable'];
+		$pages = ( isset( $options['pages_unsortable'] ) ) ? $options['pages_unsortable'] : array();
 
 		$screen = get_current_screen();
 		foreach ( $pages as $page ) {
@@ -212,7 +224,7 @@ class Unsortable_Meta_Box_Admin {
 	public function disable_sortable() {
 
 		$options = $this->get_options();
-		$pages = $options['pages_unsortable'];
+		$pages = ( isset( $options['pages_unsortable'] ) ) ? $options['pages_unsortable'] : array();
 
 		$screen = get_current_screen();
 		foreach ( $pages as $page ) {
