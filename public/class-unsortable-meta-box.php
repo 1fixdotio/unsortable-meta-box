@@ -232,7 +232,7 @@ class Unsortable_Meta_Box {
 				$html .= '</p>';
 			$html .= '</div><!-- /.updated -->';
 
-			echo $html;
+			echo esc_html( $html );
 
 			delete_option( 'umb-display-activation-message' );
 

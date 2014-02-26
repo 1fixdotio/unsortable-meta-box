@@ -133,7 +133,7 @@ class Unsortable_Meta_Box_Settings {
 
 		$html .= '<p class="description">' . __( 'Meta boxes in checked pages can\'t be dragged or sorted.', $this->plugin_slug ) . '</p>';
 
-		echo $html;
+		echo esc_html( $html );
 
 	} // end pages_unsortable_callback
 
@@ -152,7 +152,7 @@ class Unsortable_Meta_Box_Settings {
 
 		$html .= '<p class="description">' . __( 'The positions of meta boxes in checked pages will be reset.', $this->plugin_slug ) . '</p>';
 
-		echo $html;
+		echo esc_html( $html );
 
 	} // end pages_reset_positions_callback
 
