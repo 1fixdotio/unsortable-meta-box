@@ -14,7 +14,22 @@ class Unsortable_Meta_Box_Settings {
 	 */
 	protected $plugin_slug = null;
 
-	function __construct() {
+	/**
+	 * Instance of this class.
+	 *
+	 * @since    0.8.0
+	 *
+	 * @var      object
+	 */
+	protected static $instance = null;
+
+	/**
+	 * Initialize the plugin by setting localization and loading public scripts
+	 * and styles.
+	 *
+	 * @since     0.8.0
+	 */
+	private function __construct() {
 
 		$plugin = Unsortable_Meta_Box::get_instance();
 		$this->plugin_slug = $plugin->get_plugin_slug();
@@ -24,35 +39,28 @@ class Unsortable_Meta_Box_Settings {
 	}
 
 	/**
-	 * Provides default values for the Input Options.
+	 * Return an instance of this class.
+	 *
+	 * @since     0.8.0
+	 *
+	 * @return    object    A single instance of this class.
 	 */
-	function default_settings() {
+	public static function get_instance() {
 
-		$defaults = array(
-			'pages_unsortable' => 	array(
-							'dashboard' => 'dashboard',
-							'post' => 'post',
-							'page' => 'page'
-						),
-			'pages_reset_positions'	=> array(
-							'dashboard' => 'dashboard',
-							'post' => 'post',
-							'page' => 'page'
-						   )
-		);
+		// If the single instance hasn't been set, set it now.
+		if ( null == self::$instance ) {
+			self::$instance = new self;
+		}
 
-		return apply_filters( 'default_settings', $defaults );
-
-	} // end default_settings
+		return self::$instance;
+	}
 
 	/**
-	 * Initializes the theme's input example by registering the Sections,
-	 * Fields, and Settings. This particular group of options is used to demonstration
-	 * validation and sanitization.
+	 * Registering the Sections, Fields, and Settings.
 	 *
 	 * This function is registered with the 'admin_init' hook.
 	 */
-	function admin_init() {
+	public function admin_init() {
 
 		if( false == get_option( $this->plugin_slug ) ) {
 			add_option( $this->plugin_slug, $this->default_settings() );
@@ -88,7 +96,29 @@ class Unsortable_Meta_Box_Settings {
 
 	} // end admin_init
 
-	function pages_unsortable_callback() {
+	/**
+	 * Provides default values for the plugin settings.
+	 */
+	public function default_settings() {
+
+		$defaults = array(
+			'pages_unsortable' => 	array(
+							'dashboard' => 'dashboard',
+							'post' => 'post',
+							'page' => 'page'
+						),
+			'pages_reset_positions'	=> array(
+							'dashboard' => 'dashboard',
+							'post' => 'post',
+							'page' => 'page'
+						   )
+		);
+
+		return apply_filters( 'default_settings', $defaults );
+
+	} // end default_settings
+
+	public function pages_unsortable_callback() {
 
 		$options = get_option( $this->plugin_slug );
 		$options = isset( $options['pages_unsortable'] ) ? $options['pages_unsortable'] : array();
@@ -97,8 +127,8 @@ class Unsortable_Meta_Box_Settings {
 		$html = '';
 		foreach ( $pages as $key => $value ) {
 			$option = ( isset( $options[$key] ) ) ? $options[$key] : '';
-			$html .= '<input type="checkbox" id="' . $key . '" name="' . $this->plugin_slug . '[pages_unsortable][' . $key . ']" value="' . $key . '"' . checked( $key, $option, false ) . '/>';
-			$html .= '<label for="' . $key . '">' . $value . '</label> ';
+			$html .= '<input type="checkbox" id="pages_unsortable-' . $key . '" name="' . $this->plugin_slug . '[pages_unsortable][' . $key . ']" value="' . $key . '"' . checked( $key, $option, false ) . '/>';
+			$html .= '<label for="pages_unsortable-' . $key . '">' . $value . '</label> ';
 		}
 
 		$html .= '<p class="description">' . __( 'Meta boxes in checked pages can\'t be dragged or sorted.', $this->plugin_slug ) . '</p>';
@@ -107,7 +137,7 @@ class Unsortable_Meta_Box_Settings {
 
 	} // end pages_unsortable_callback
 
-	function pages_reset_positions_callback() {
+	public function pages_reset_positions_callback() {
 
 		$options = get_option( $this->plugin_slug );
 		$options = ( isset( $options['pages_reset_positions'] ) ) ? $options['pages_reset_positions'] : array();
@@ -116,8 +146,8 @@ class Unsortable_Meta_Box_Settings {
 		$html = '';
 		foreach ( $pages as $key => $value ) {
 			$option = ( isset( $options[$key] ) ) ? $options[$key] : '';
-			$html .= '<input type="checkbox" id="' . $key . '" name="' . $this->plugin_slug . '[pages_reset_positions][' . $key . ']" value="' . $key . '"' . checked( $key, $option, false ) . '/>';
-			$html .= '<label for="' . $key . '">' . $value . '</label> ';
+			$html .= '<input type="checkbox" id="pages_reset_positions-' . $key . '" name="' . $this->plugin_slug . '[pages_reset_positions][' . $key . ']" value="' . $key . '"' . checked( $key, $option, false ) . '/>';
+			$html .= '<label for="pages_reset_positions-' . $key . '">' . $value . '</label> ';
 		}
 
 		$html .= '<p class="description">' . __( 'The positions of meta boxes in checked pages will be reset.', $this->plugin_slug ) . '</p>';
@@ -126,7 +156,7 @@ class Unsortable_Meta_Box_Settings {
 
 	} // end pages_reset_positions_callback
 
-	function get_post_type_name( $post_type ) {
+	public function get_post_type_name( $post_type ) {
 
 		$obj = get_post_type_object( $post_type );
 		$post_type_name = $obj->labels->name;
@@ -134,7 +164,7 @@ class Unsortable_Meta_Box_Settings {
 		return $post_type_name;
 	}
 
-	function get_pages() {
+	public function get_pages() {
 
 		$pages = array(
 			'dashboard' => 'Dashboard'
@@ -150,6 +180,5 @@ class Unsortable_Meta_Box_Settings {
 	}
 }
 
-global $settings;
-$settings = new Unsortable_Meta_Box_Settings();
+Unsortable_Meta_Box_Settings::get_instance();
 ?>
