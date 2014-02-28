@@ -28,7 +28,7 @@ class Unsortable_Meta_Box {
 	 *
 	 * @var     string
 	 */
-	const VERSION = '0.8.0';
+	const VERSION = '0.8.1';
 
 	/**
 	 * Unique identifier for your plugin.
@@ -232,7 +232,7 @@ class Unsortable_Meta_Box {
 				$html .= '</p>';
 			$html .= '</div><!-- /.updated -->';
 
-			echo esc_html( $html );
+			echo $html;
 
 			delete_option( 'umb-display-activation-message' );
 

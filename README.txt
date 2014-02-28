@@ -5,7 +5,7 @@ Donate link: http://1fix.io/
 Tags: disable-dragging, meta-box, unsort, reset-positions
 Requires at least: 3.5
 Tested up to: 3.8.1
-Stable tag: 0.8.0
+Stable tag: 0.8.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -52,6 +52,9 @@ This plugin is made for:
 2. A settings page for this plugin.
 
 == Changelog ==
+
+= 0.8.1 =
+* Remove esc_html, no need to use it in these circumstances.
 
 = 0.8.0 =
 * Use 3-digit version number.
