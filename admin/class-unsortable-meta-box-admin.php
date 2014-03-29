@@ -77,7 +77,6 @@ class Unsortable_Meta_Box_Admin {
 
 		// Load admin style sheet and JavaScript.
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_styles' ) );
-		// add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_scripts' ) );
 
 		// Add the options page and menu item.
 		require_once( plugin_dir_path( __FILE__ ) . 'includes/settings.php' );
@@ -96,7 +95,6 @@ class Unsortable_Meta_Box_Admin {
 		 */
 		add_action( 'admin_enqueue_scripts', array( $this, 'disable_sortable' ) );
 		add_action( 'admin_action_update', array( $this, 'reset_positions' ) );
-		// add_filter( '@TODO', array( $this, 'filter_method_name' ) );
 
 	}
 
@@ -120,7 +118,7 @@ class Unsortable_Meta_Box_Admin {
 	/**
 	 * Register and enqueue admin-specific style sheet.
 	 *
-	 * @since     0.1
+	 * @since     0.1.0
 	 *
 	 * @return    null    Return early if no settings page is registered.
 	 */
@@ -134,26 +132,6 @@ class Unsortable_Meta_Box_Admin {
 			if ( $screen->id == $page )
 				wp_enqueue_style( $this->plugin_slug .'-admin-styles', plugins_url( 'assets/css/admin.css', __FILE__ ), array(), Unsortable_Meta_Box::VERSION );
 		}
-
-	}
-
-	/**
-	 * Register and enqueue admin-specific JavaScript.
-	 *
-	 * @since     0.0.1
-	 *
-	 * @return    null    Return early if no settings page is registered.
-	 */
-	public function enqueue_admin_scripts() {
-
-		if ( ! isset( $this->plugin_screen_hook_suffix ) ) {
-			return;
-		}
-
-		// $screen = get_current_screen();
-		// if ( $this->plugin_screen_hook_suffix == $screen->id ) {
-		// 	wp_enqueue_script( $this->plugin_slug . '-admin-script', plugins_url( 'assets/js/admin.js', __FILE__ ), array( 'jquery' ), Unsortable_Meta_Box::VERSION );
-		// }
 
 	}
 
@@ -178,8 +156,6 @@ class Unsortable_Meta_Box_Admin {
 			$this->plugin_slug,
 			array( $this, 'display_plugin_admin_page' )
 		);
-
-		// add_contextual_help( $this->plugin_screen_hook_suffix, '<p>Some custom help text.</p>' );
 
 	}
 
@@ -211,7 +187,7 @@ class Unsortable_Meta_Box_Admin {
 	/**
 	 * Disable meta box sortable script
 	 *
-	 * @since    0.1
+	 * @since    0.1.0
 	 */
 	public function disable_sortable() {
 
@@ -221,8 +197,6 @@ class Unsortable_Meta_Box_Admin {
 		$screen = get_current_screen();
 		foreach ( $pages as $page ) {
 			if ( $screen->id == $page ) {
-				$suffix = SCRIPT_DEBUG ? '' : '.min';
-
 				wp_deregister_script( 'postbox' );
 
 				wp_enqueue_script( 'postbox', plugins_url( 'assets/js/admin.js', __FILE__ ), array( 'jquery' ), Unsortable_Meta_Box::VERSION );
@@ -234,7 +208,7 @@ class Unsortable_Meta_Box_Admin {
 	/**
 	 * Reset positions of meta boxes on checked pages
 	 *
-	 * @since 0.3
+	 * @since 0.3.0
 	 *
 	 * @return void
 	 */
@@ -274,19 +248,6 @@ class Unsortable_Meta_Box_Admin {
 				);
 
 		return $this->options;
-	}
-
-	/**
-	 * NOTE:     Filters are points of execution in which WordPress modifies data
-	 *           before saving it or sending it to the browser.
-	 *
-	 *           Filters: http://codex.wordpress.org/Plugin_API#Filters
-	 *           Reference:  http://codex.wordpress.org/Plugin_API/Filter_Reference
-	 *
-	 * @since    0.0.1
-	 */
-	public function filter_method_name() {
-		// @TODO: Define your filter hook callback here
 	}
 
 }

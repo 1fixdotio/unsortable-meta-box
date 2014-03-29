@@ -28,7 +28,7 @@ class Unsortable_Meta_Box {
 	 *
 	 * @var     string
 	 */
-	const VERSION = '0.8.1';
+	const VERSION = '0.9.0';
 
 	/**
 	 * Unique identifier for your plugin.
@@ -211,7 +211,7 @@ class Unsortable_Meta_Box {
 	/**
 	 * Fired for each blog when the plugin is deactivated.
 	 *
-	 * @since    0.6
+	 * @since    0.6.0
 	 */
 	private static function single_deactivate() {
 
