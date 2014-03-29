@@ -198,8 +198,8 @@ class Unsortable_Meta_Box_Admin {
 		foreach ( $pages as $page ) {
 			if ( $screen->id == $page ) {
 				wp_deregister_script( 'postbox' );
-
-				wp_enqueue_script( 'postbox', plugins_url( 'assets/js/admin.js', __FILE__ ), array( 'jquery' ), Unsortable_Meta_Box::VERSION );
+				if ( 'dashboard' != $screen->id )
+					wp_register_script( 'postbox', plugins_url( 'assets/js/admin.js', __FILE__ ), array( 'jquery-ui-sortable' ), Unsortable_Meta_Box::VERSION );
 			}
 		}
 
