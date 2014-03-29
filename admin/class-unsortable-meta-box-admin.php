@@ -126,9 +126,6 @@ class Unsortable_Meta_Box_Admin {
 	 */
 	public function enqueue_admin_styles() {
 
-		// if ( ! isset( $this->plugin_screen_hook_suffix ) ) {
-		// 	return;
-		// }
 		$options = $this->get_options();
 		$pages = ( isset( $options['pages_unsortable'] ) ) ? $options['pages_unsortable'] : array();
 
@@ -137,11 +134,6 @@ class Unsortable_Meta_Box_Admin {
 			if ( $screen->id == $page )
 				wp_enqueue_style( $this->plugin_slug .'-admin-styles', plugins_url( 'assets/css/admin.css', __FILE__ ), array(), Unsortable_Meta_Box::VERSION );
 		}
-
-		// $screen = get_current_screen();
-		// if ( $this->plugin_screen_hook_suffix == $screen->id ) {
-		// 	wp_enqueue_style( $this->plugin_slug .'-admin-styles', plugins_url( 'assets/css/admin.css', __FILE__ ), array(), Unsortable_Meta_Box::VERSION );
-		// }
 
 	}
 
@@ -228,8 +220,13 @@ class Unsortable_Meta_Box_Admin {
 
 		$screen = get_current_screen();
 		foreach ( $pages as $page ) {
-			if ( $screen->id == $page )
+			if ( $screen->id == $page ) {
+				$suffix = SCRIPT_DEBUG ? '' : '.min';
+
 				wp_deregister_script( 'postbox' );
+
+				wp_enqueue_script( 'postbox', plugins_url( 'assets/js/admin.js', __FILE__ ), array( 'jquery' ), Unsortable_Meta_Box::VERSION );
+			}
 		}
 
 	}
