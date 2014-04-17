@@ -4,7 +4,7 @@ Contributors: 1fixdotio, yoren
 Donate link: http://1fix.io/
 Tags: disable-dragging, meta-box, unsort, reset-positions
 Requires at least: 3.5
-Tested up to: 3.8.1
+Tested up to: 3.9
 Stable tag: 0.9.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
